@@ -8,6 +8,7 @@ def run():
 
     # get time of oldest file to keep
     ts = get_oldest_ts()
+
     print("timestamp of oldest file left: %s" % ts)
 
     # track total number of files deleted
@@ -27,10 +28,10 @@ def run():
             break
         
         num_passes += 1
-        total_ids.extend(ids)
+        total_ids.extend(good_ids)
 
-        these_bad_ids = delete_files(ids)
-        print("bad files this pass: [ %d ]" % (', '.join(these_bad_ids)))
+        these_bad_ids = delete_files(good_ids)
+        print("bad files this pass: [ %s ]" % (', '.join(these_bad_ids)))
         bad_ids.extend(these_bad_ids)
     
     print("\n-----\nlooks like we're done\n-----")

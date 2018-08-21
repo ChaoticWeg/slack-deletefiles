@@ -3,12 +3,15 @@ import threading
 
 class DeleteThread(threading.Thread):
 
-    def __init__(self, client, bad_bucket):
+    def __init__(self, client, id, bad_bucket):
         threading.Thread.__init__(self)
         self.client = client
+        self.id = id
         self.bad_bucket = bad_bucket
     
-    def run(self, id):
+    def run(self):
+        id = self.id
+
         try:
 
             if self.client is None or not self.client:

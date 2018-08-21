@@ -42,7 +42,7 @@ def delete_files(files):
     # multi-thread to compensate for I/O
     threads = []
     for id in files:
-        threads.append(DeleteThread(client, bad_bucket))
+        threads.append(DeleteThread(client, id, bad_bucket))
     
     # start each thread
     for thread in threads:
@@ -56,7 +56,7 @@ def delete_files(files):
     bad_ids = []
     while True:
         try:
-            bad_id = bucket.get(block=False)
+            bad_id = bad_bucket.get(block=False)
         except queue.Empty:
             return bad_ids
         else:
