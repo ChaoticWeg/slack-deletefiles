@@ -17,7 +17,6 @@ class DeleteThread(threading.Thread):
             if self.client is None or not self.client:
                 raise NoClientError(id)
 
-            print("deleting file: %s" % id)
             response = self.client.api_call("files.delete", file=id)
 
             if not 'ok' in response:
@@ -29,8 +28,6 @@ class DeleteThread(threading.Thread):
                 else:
                     raise ResponseNotOkError(response['error'])
             
-            print("successfully deleted file: %s" % id)
-
         except NoClientError:
             pass
         
