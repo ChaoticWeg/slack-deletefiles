@@ -1,2 +1,3 @@
-# slack-deletefiles
-Delete files from a free Slack team that I mod.
+# delete-files-oauth
+
+Slack app - delete files older than 30 days
