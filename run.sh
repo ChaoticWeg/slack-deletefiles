@@ -27,7 +27,10 @@ case "${py_ok}" in
 esac
 
 # log contents: escape newlines and strip control characters
-log_contents="$(cat -v "${logfile}" | sed ':a;N;$!ba;s/\n/\\n/g' | tr -d '\000-\037')"
+log_contents="$(cat "${logfile}")"
+log_contents="${log_contents//$'\n'/'\n'}"  # escape newlines
+log_contents="$(echo "${log_contents}" | tr -d '\000-\037')"  # strip control characters
+
 embed_desc="${log_contents}\n\nCC: <@149987025573904385>"
 
 # post log output and logfile
