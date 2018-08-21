@@ -26,13 +26,20 @@ case "${py_ok}" in
     *) embed_color="0xba0000";;
 esac
 
-log_contents="$(cat -v "${logfile}" | sed ':a;N;$!ba;s/\n/\\n/g' | tr -d '\000-\011\013-\037')"
-echo "${log_contents}"
+# log contents: escape newlines and strip control characters
+log_contents="$(cat -v "${logfile}" | sed ':a;N;$!ba;s/\n/\\n/g' | tr -d '\000-\037')"
 embed_desc="${log_contents}\n\nCC: <@149987025573904385>"
 
-bash discord.sh --author "slack-deletefiles" --author-icon "https://banner2.kisspng.com/20180711/ubb/kisspng-computer-icons-icon-design-slack-slack-logo-5b45ad1a141302.1844356415312929540822.jpg" \
-    --title "File Deletion" --color "${embed_color}" --description "${embed_desc}"
-bash discord.sh --file "${logfile}"
+# post log output and logfile
+bash discord.sh \
+    --username "slack-deletefiles" \
+    --title "File Deletion" \
+    --color "${embed_color}" \
+    --description "${embed_desc}"
+
+bash discord.sh \
+    --file "${logfile}" \
+    --text "Full log file attached: $(basename "${logfile}")"
 
 popd >/dev/null 2>&1
 popd >/dev/null 2>&1
