@@ -1,4 +1,7 @@
-# Ignore machine-specific settings
+# Vim swapfiles
+*.swp
+
+# Machine-specific settings
 .vscode/settings.json
 
 # Byte-compiled / optimized / DLL files
