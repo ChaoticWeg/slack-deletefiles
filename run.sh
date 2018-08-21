@@ -35,7 +35,8 @@ bash discord.sh \
     --username "slack-deletefiles" \
     --title "File Deletion" \
     --color "${embed_color}" \
-    --description "${embed_desc}"
+    --description "${embed_desc}" \
+    --timestamp
 
 bash discord.sh \
     --file "${logfile}" \
