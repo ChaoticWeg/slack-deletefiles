@@ -6,15 +6,7 @@ import queue
 
 from .exceptions import TokenMissingError, ResponseNotOkError, MalformedResponseError, NoClientError
 
-def get_files(ts_to=datetime.now().timestamp()):
-    token = environ.get('SLACK_TOKEN')
-    if token is None:
-        raise TokenMissingError()
-    
-    client = SlackClient(token)
-
-    response = client.api_call("files.list", ts_to=ts_to)
-
+def validate_files_response(response):
     if not 'ok' in response:
         raise MalformedResponseError("no confirmation")
     
@@ -26,8 +18,29 @@ def get_files(ts_to=datetime.now().timestamp()):
     
     if not 'files' in response:
         raise MalformedResponseError("no files")
-    
+
+def get_page(page, client, ts_to):
+    response = client.api_call("files.list", ts_to=ts_to, page=page)
+    validate_files_response(response)
     return [f['id'] for f in response['files']]
+
+def get_files(ts_to=datetime.now().timestamp()):
+    token = environ.get('SLACK_TOKEN')
+    if token is None:
+        raise TokenMissingError()
+    
+    client = SlackClient(token)
+
+    first_res = client.api_call("files.list", ts_to=ts_to)
+    validate_files_response(first_res)
+    
+    files = [f['id'] for f in first_res['files']]
+    num_pages = int(first_res['paging']['pages'])
+    for this_page_num in range(1, num_pages):
+        this_page = get_page(this_page_num, client, ts_to)
+        files.extend(this_page)
+
+    return files
 
 def delete_files(files):
     token = environ.get('SLACK_TOKEN')

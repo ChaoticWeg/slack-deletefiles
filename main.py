@@ -19,10 +19,14 @@ def run():
     # fetch/delete loop
     while True:
         print("\n-----\nPASS %d\n-----" % (num_passes + 1))
+        print("grabbing files posted before %d" % ts);
+
         these_ids = get_files(ts_to=ts)
+        print("got %d TOTAL files" % len(these_ids))
+        
         good_ids = [ f for f in these_ids if not f in bad_ids ]
         num_ids = len(good_ids)
-        print("got %d files" % num_ids)
+        print("got %d GOOD files" % num_ids)
 
         if num_ids < 1:
             break

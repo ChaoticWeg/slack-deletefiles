@@ -1,0 +1,3 @@
+[submodule "discord.sh"]
+	path = discord.sh
+	url = https://github.com/chaoticweg/discord.sh
