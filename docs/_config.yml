@@ -1,4 +1,4 @@
-title: delete-files-oauth
+title: DeleteFiles
 description: Delete files older than 30 days.
 baseurl: "/slack-deletefiles" # the subpath of your site, e.g. /blog
 url: "https://chaoticweg.cc/slack-deletefiles" # the base hostname & protocol for your site, e.g. http://example.com

@@ -1,3 +1,3 @@
-# delete-files-oauth
+# DeleteFiles
 
-Slack app - delete files older than 30 days
+Delete files older than 30 days.
