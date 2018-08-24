@@ -7,4 +7,6 @@ url: "https://chaoticweg.cc/slack-deletefiles" # the base hostname & protocol fo
 markdown: kramdown
 theme: minima
 plugins:
+  - github-pages
   - jekyll-feed
+  - jekyll-seo-tag
