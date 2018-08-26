@@ -31,7 +31,7 @@ def get_files(ts_to=datetime.now().timestamp()):
     
     client = SlackClient(token)
 
-    first_res = client.api_call("files.list", ts_to=ts_to)
+    first_res = client.api_call("files.list", ts_to=ts_to, ts_from=0)
     validate_files_response(first_res)
     
     files = [f['id'] for f in first_res['files']]
